@@ -9,4 +9,5 @@
 /out/**
 stacktrace.log
 test/reports
-*class
+*.class
+/web-app/WEB-INF/

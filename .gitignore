@@ -11,3 +11,5 @@ stacktrace.log
 test/reports
 *.class
 /web-app/WEB-INF/
+target/test-classes/
+target/test-reports/

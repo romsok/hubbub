@@ -13,7 +13,7 @@ class UserIntegrationTests extends GrailsUnitTestCase {
 	
 
     void testFirstSaveEver() {
-		def user = new User(userId:'joejoejoe', password: 'secretsecret', homepage: 'http://www.amazon.com')
+		def user = new User(userId:'joejoejoe', password: 'secretsecret')
 		
 		assertNotNull user.save()
 		assertNotNull user.id
@@ -24,7 +24,7 @@ class UserIntegrationTests extends GrailsUnitTestCase {
     }
 
 	void testSaveAndUpdate() {
-		def user = new User(userId:'joejoejoe', password: 'secretsecret', homepage: 'http://www.amazon.com')
+		def user = new User(userId:'joejoejoe', password: 'secretsecret')
 		
 		assertNotNull user.save()
 		
@@ -40,7 +40,7 @@ class UserIntegrationTests extends GrailsUnitTestCase {
 	
 
 	void testSaveThenDelete() {
-		def user = new User(userId:'joejoejoe', password: 'secretsecret', homepage: 'http://www.amazon.com')		
+		def user = new User(userId:'joejoejoe', password: 'secretsecret')		
 		assertNotNull user.save()
 		
 		def foundUser = User.get(user.id)
@@ -51,7 +51,7 @@ class UserIntegrationTests extends GrailsUnitTestCase {
 
 	
 	void testEvilSave() {
-		def user = new User(userId: "myself", password: "small", homepage: "notalink")
+		def user = new User(userId: "myself", password: "small")
 		
 		assertFalse user.validate()
 		assertTrue user.hasErrors()
@@ -61,21 +61,17 @@ class UserIntegrationTests extends GrailsUnitTestCase {
 		assertEquals "size.toosmall", errors.getFieldError("password").code
 		assertEquals "small", errors.getFieldError("password").rejectedValue
 		
-		assertEquals "url.invalid", errors.getFieldError("homepage").code
-		assertEquals "notalink", errors.getFieldError("homepage").rejectedValue
-		
 		assertNull errors.getFieldError("userId")
 	}
 	
 	void testEvilSaveCorrected() {
-		def user = new User(userId: "myself", password: "small", homepage: "notalink")
+		def user = new User(userId: "myself", password: "small")
 		
 		assertFalse user.validate()
 		assertTrue user.hasErrors()
 		assertNull user.save()
 		
 		user.password = "correctleng"
-		user.homepage = "http://www.ebay.com"
 		
 		assertTrue user.validate()
 		assertFalse user.hasErrors()

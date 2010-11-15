@@ -25,4 +25,22 @@ class PostIntegrationTests extends GrailsUnitTestCase {
 		
 		assertEquals 3, User.get(user.id).posts.size()
     }
+	
+	void testAccessingPosts() {
+		def user = new User(userId: "bobbobbob", password: "secretsecret").save()
+		
+		def post1 = new Post(content: "First")
+		user.addToPosts(post1)		
+		def post2 = new Post(content: "Second")
+		user.addToPosts(post2)
+		def post3 = new Post(content: "Third")
+		user.addToPosts(post3)
+		
+		def foundUser = User.get(user.id)
+		
+		def postNames = foundUser.posts.collect{it.content}
+		
+		assertEquals(["First","Second","Third"], postNames.sort())
+		
+    }
 }

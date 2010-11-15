@@ -7,7 +7,7 @@ class User {
 	Date dateCreated
 	Profile profile
 	
-	static hasMany = [posts: Post]
+	static hasMany = [posts: Post, tags: Tag]
 	
     static constraints = {
 		userId(size: 3..20, unique: true)

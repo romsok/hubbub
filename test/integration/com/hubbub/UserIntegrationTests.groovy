@@ -77,4 +77,19 @@ class UserIntegrationTests extends GrailsUnitTestCase {
 		assertFalse user.hasErrors()
 		assertNotNull user.save()
 	}
+	
+	void testFollowing(){
+		def ramy = new User(userId: "ramy", password: "password123").save()
+		def mila = new User(userId: "mila", password: "password123").save()
+		def juliet = new User(userId: "juliet", password: "password123").save()
+		
+		ramy.addToFollowing(mila)
+		ramy.addToFollowing(juliet)
+		
+		assertEquals 2, ramy.following.size()
+		
+		juliet.addToFollowing(ramy)
+		
+		assertEquals 1, juliet.following.size()
+	}
 }

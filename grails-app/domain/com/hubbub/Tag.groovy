@@ -5,8 +5,8 @@ class Tag {
 	String name
 	User user
 	
-	hasMany = [posts: Post]
-	belongsTo = [User, Post]
+	static hasMany = [posts: Post]
+	static belongsTo = [User, Post]
 	
     static constraints = {
 		name(blank: false)

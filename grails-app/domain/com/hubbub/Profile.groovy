@@ -23,4 +23,8 @@ class Profile {
 		country(nullable: true)
 		jabberAddress(email: true, nullable: true)
     }
+	
+	String toString() {
+		return "Profile for ${fullName} (${id})"
+	}
 }
